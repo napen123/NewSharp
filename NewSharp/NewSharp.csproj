@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Extensions\Enum.Extensions.cs" />
     <Compile Include="Extensions\IList.Extensions.cs" />
+    <Compile Include="Extensions\Stack.Extensions.cs" />
     <Compile Include="Extensions\String.Extensions.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
