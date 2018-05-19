@@ -8,7 +8,7 @@ namespace NewSharp.Extensions
         {
             return (T) Enum.Parse(typeof(T), value, ignoreCase);
         }
-
+        
         public static T ParseChecked<T>(string str, bool ignoreCase = false)
         {
             var type = typeof(T);
