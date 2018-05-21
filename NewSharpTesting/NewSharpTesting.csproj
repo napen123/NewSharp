@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmark.cs" />
+    <Compile Include="Extensions\IntegerExtensionsTest.cs" />
     <Compile Include="Extensions\StreamExtensionsTest.cs" />
     <Compile Include="Extensions\StackExtensionsTest.cs" />
     <Compile Include="Extensions\StringExtensionsTest.cs" />
