@@ -19,13 +19,13 @@ namespace NewSharp.Extensions
             return encoding.GetString(p, (int) (b - p));
         }
 
-        public static unsafe string IntoString(this IntPtr ptr, Encoding encoding, int length)
+        public static unsafe string IntoString(this IntPtr ptr, Encoding encoding, int strLength)
         {
             if (ptr == IntPtr.Zero)
                 return null;
 
             var p = (byte*) ptr;
-            var b = ((byte*) ptr) + length;
+            var b = (byte*) ptr + strLength;
 
             return encoding.GetString(p, (int) (b - p));
         }
