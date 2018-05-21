@@ -7,7 +7,7 @@ using NewSharp.Extensions;
 namespace NewSharpTesting.Extensions
 {
     [TestClass]
-    public class StackExtensions
+    public class StackExtensionsTest
     {
         [TestMethod]
         public void TryPeekTest()
