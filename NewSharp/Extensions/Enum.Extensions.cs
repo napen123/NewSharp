@@ -5,11 +5,13 @@ namespace NewSharp.Extensions
     public static class EnumExtensions
     {
         public static T Parse<T>(string value, bool ignoreCase = false)
+            where T : Enum
         {
             return (T) Enum.Parse(typeof(T), value, ignoreCase);
         }
-        
+
         public static T ParseChecked<T>(string str, bool ignoreCase = false)
+            where T : Enum
         {
             var type = typeof(T);
 
@@ -20,6 +22,7 @@ namespace NewSharp.Extensions
         }
 
         public static bool TryParse<T>(string str, out T value)
+            where T : Enum
         {
             var type = typeof(T);
 
@@ -30,12 +33,13 @@ namespace NewSharp.Extensions
                 return false;
             }
 
-            value = (T)Enum.Parse(type, str, false);
+            value = (T) Enum.Parse(type, str, false);
 
             return true;
         }
 
         public static bool TryParse<T>(string str, bool ignoreCase, out T value)
+            where T : Enum
         {
             var type = typeof(T);
 
