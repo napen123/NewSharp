@@ -8,6 +8,21 @@ namespace NewSharpTesting.Extensions
     public class IDictionaryExtensionsTest
     {
         [TestMethod]
+        public void GetOrAddTest()
+        {
+            const string key = "key";
+
+            var dict = new Dictionary<string, int>();
+            Assert.AreEqual(5, dict.GetOrAdd(key, 5));
+
+            dict[key] = 25;
+            Assert.AreEqual(25, dict.GetOrAdd(key, 0));
+
+            dict.Remove(key);
+            Assert.AreEqual(default, dict.GetOrAdd(key, default));
+        }
+
+        [TestMethod]
         public void GetOrAddDefaultTest()
         {
             const string key = "key";
