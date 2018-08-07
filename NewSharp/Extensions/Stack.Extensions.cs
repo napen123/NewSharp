@@ -14,7 +14,7 @@ namespace NewSharp.Extensions
             }
             catch
             {
-                item = default(T);
+                item = default;
 
                 return false;
             }
@@ -30,7 +30,7 @@ namespace NewSharp.Extensions
             }
             catch
             {
-                item = default(T);
+                item = default;
 
                 return false;
             }
