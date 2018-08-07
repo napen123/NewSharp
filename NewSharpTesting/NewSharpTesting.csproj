@@ -20,6 +20,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Benchmark.cs" />
+    <Compile Include="Extensions\IDictionaryExtensionsTest.cs" />
     <Compile Include="Extensions\IntegerExtensionsTest.cs" />
     <Compile Include="Extensions\IntPtrExtensionsTest.cs" />
     <Compile Include="Extensions\StreamExtensionsTest.cs" />
