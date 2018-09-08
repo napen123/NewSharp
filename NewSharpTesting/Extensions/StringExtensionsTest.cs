@@ -12,13 +12,28 @@ namespace NewSharpTesting.Extensions
         [TestMethod]
         public void ReverseTest()
         {
+            Assert.IsNull(((string)null).Reverse());
+            Assert.IsNull(((string)null).ReverseLarge());
+
+            Assert.AreEqual(string.Empty, string.Empty.Reverse());
+            Assert.AreEqual(string.Empty, string.Empty.ReverseLarge());
+
             Assert.AreEqual("!dlroW ,olleH", "Hello, World!".Reverse());
+            Assert.AreEqual("!dlroW ,olleH", "Hello, World!".ReverseUnchecked());
+
+            Assert.AreEqual(
+                ")...erom emos tuo siht dap retteB( !gnirts )gnol oot ton tub( regnol a si sihT",
+                "This is a longer (but not too long) string! (Better pad this out some more...)".ReverseLarge());
+
+            Assert.AreEqual(
+                ")...erom emos tuo siht dap retteB( !gnirts )gnol oot ton tub( regnol a si sihT",
+                "This is a longer (but not too long) string! (Better pad this out some more...)".ReverseLargeUnchecked());
         }
         
         [TestMethod]
         public void IsWhitespaceTest()
         {
-            Assert.AreEqual(false, (null as string).IsWhiteSpace());
+            Assert.AreEqual(false, ((string) null).IsWhiteSpace());
             Assert.AreEqual(true, "         ".IsWhiteSpace());
             Assert.AreEqual(false, "Test!".IsWhiteSpace());
             Assert.AreEqual(false, "   Test! ".IsWhiteSpace());
@@ -47,7 +62,7 @@ namespace NewSharpTesting.Extensions
             {
                 var @short = Benchmark.Measure(() => "Yes".Reverse(), iter);
                 var hello = Benchmark.Measure(() => "Hello, World!".Reverse(), iter);
-                var @long = Benchmark.Measure(() => "This is a longer (yet not too long) string! (Better pad this out some more...)".ReverseLarge(), iter);
+                var @long = Benchmark.Measure(() => "This is a longer (but not too long) string! (Better pad this out some more...)".ReverseLarge(), iter);
 
                 Console.WriteLine("1000 Iterations (Checked):");
                 Console.WriteLine("Short: " + @short + "ms");
@@ -60,7 +75,7 @@ namespace NewSharpTesting.Extensions
             {
                 var @short = Benchmark.Measure(() => "Yes".ReverseUnchecked(), iter);
                 var hello = Benchmark.Measure(() => "Hello, World!".ReverseUnchecked(), iter);
-                var @long = Benchmark.Measure(() => "This is a longer (yet not too long) string! (Better pad this out some more...)".ReverseLargeUnchecked(), iter);
+                var @long = Benchmark.Measure(() => "This is a longer (but not too long) string! (Better pad this out some more...)".ReverseLargeUnchecked(), iter);
 
                 Console.WriteLine("1000 Iterations (Unchecked):");
                 Console.WriteLine("Short: " + @short + "ms");

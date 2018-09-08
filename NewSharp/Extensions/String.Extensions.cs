@@ -22,7 +22,7 @@ namespace NewSharp.Extensions
             fixed(char* s = str)
             {
                 for (var i = 0; i < length; i++)
-                    ret[length - i] = s[i];
+                    ret[length - i - 1] = s[i];
             }
 
             return new string(ret, 0, length);
@@ -40,7 +40,7 @@ namespace NewSharp.Extensions
             fixed (char* s = str)
             {
                 for (var i = 0; i < length; i++)
-                    ret[length - i] = s[i];
+                    ret[length - i - 1] = s[i];
             }
 
             return new string(ret, 0, length);
@@ -48,9 +48,12 @@ namespace NewSharp.Extensions
 
         public static string ReverseLarge(this string str)
         {
+            if (str == null)
+                return null;
+
             var length = str.Length;
 
-            if (str == null || length == 0)
+            if (length == 0)
                 return str;
 
             var c = str.ToCharArray();
@@ -59,7 +62,7 @@ namespace NewSharp.Extensions
             return new string(c);
         }
 
-        public static unsafe string ReverseLargeUnchecked(this string str)
+        public static string ReverseLargeUnchecked(this string str)
         {
             var c = str.ToCharArray();
             Array.Reverse(c, 0, str.Length);
