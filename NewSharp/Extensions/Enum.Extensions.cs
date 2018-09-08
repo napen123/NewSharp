@@ -25,7 +25,7 @@ namespace NewSharp.Extensions
 
             if (!type.IsEnum)
             {
-                value = default(T);
+                value = default;
 
                 return false;
             }
@@ -41,7 +41,7 @@ namespace NewSharp.Extensions
 
             if (!type.IsEnum)
             {
-                value = default(T);
+                value = default;
 
                 return false;
             }
