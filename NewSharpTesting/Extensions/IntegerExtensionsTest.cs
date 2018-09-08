@@ -34,5 +34,13 @@ namespace NewSharpTesting.Extensions
                 Assert.IsTrue(ab.HasFlag(flagB));
             }
         }
+
+        [TestMethod]
+        public void ToBoolean()
+        {
+            Assert.IsTrue(5.ToBoolean());
+            Assert.IsTrue((-7).ToBoolean());
+            Assert.IsFalse(0.ToBoolean());
+        }
     }
 }
