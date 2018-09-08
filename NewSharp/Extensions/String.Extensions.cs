@@ -4,12 +4,67 @@ namespace NewSharp.Extensions
 {
     public static class StringExtensions
     {
-        public static string Reverse(this string str)
+        public static unsafe string Reverse(this string str)
         {
-            var arr = str.ToCharArray();
-            Array.Reverse(arr);
+            if (str == null)
+                return null;
+
+            var length = str.Length;
+
+            if (length == 0)
+                return str;
             
-            return new string(arr);
+            if (length >= 25)
+                return ReverseLargeUnchecked(str);
+
+            var ret = stackalloc char[length];
+
+            fixed(char* s = str)
+            {
+                for (var i = 0; i < length; i++)
+                    ret[length - i] = s[i];
+            }
+
+            return new string(ret, 0, length);
+        }
+
+        public static unsafe string ReverseUnchecked(this string str)
+        {
+            var length = str.Length;
+            
+            if (length >= 25)
+                return ReverseLargeUnchecked(str);
+
+            var ret = stackalloc char[length];
+
+            fixed (char* s = str)
+            {
+                for (var i = 0; i < length; i++)
+                    ret[length - i] = s[i];
+            }
+
+            return new string(ret, 0, length);
+        }
+
+        public static string ReverseLarge(this string str)
+        {
+            var length = str.Length;
+
+            if (str == null || length == 0)
+                return str;
+
+            var c = str.ToCharArray();
+            Array.Reverse(c, 0, length);
+
+            return new string(c);
+        }
+
+        public static unsafe string ReverseLargeUnchecked(this string str)
+        {
+            var c = str.ToCharArray();
+            Array.Reverse(c, 0, str.Length);
+
+            return new string(c);
         }
 
         public static bool IsWhiteSpace(this string str)

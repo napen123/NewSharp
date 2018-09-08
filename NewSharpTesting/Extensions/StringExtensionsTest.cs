@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,7 +14,7 @@ namespace NewSharpTesting.Extensions
         {
             Assert.AreEqual("!dlroW ,olleH", "Hello, World!".Reverse());
         }
-
+        
         [TestMethod]
         public void IsWhitespaceTest()
         {
@@ -43,20 +42,31 @@ namespace NewSharpTesting.Extensions
         [TestMethod]
         public void ReverseBenchmark()
         {
-            var @short = Benchmark.Measure(() => DoReverse("Yes"), 1000);
-            var hello = Benchmark.Measure(() => DoReverse("Hello, World!"), 1000);
-            var @long = Benchmark.Measure(() => DoReverse("This is a longer (yet not too long) string! (Better pad this out some more...)"), 1000);
+            const int iter = 100_000;
 
-            Console.WriteLine("1000 Iterations:");
-            Console.WriteLine("Short: " + @short + "ms");
-            Console.WriteLine("Hello: " + hello + "ms");
-            Console.WriteLine("Long: " + @long + "ms");
-        }
+            {
+                var @short = Benchmark.Measure(() => "Yes".Reverse(), iter);
+                var hello = Benchmark.Measure(() => "Hello, World!".Reverse(), iter);
+                var @long = Benchmark.Measure(() => "This is a longer (yet not too long) string! (Better pad this out some more...)".ReverseLarge(), iter);
 
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void DoReverse(string str)
-        {
-            str.Reverse();
+                Console.WriteLine("1000 Iterations (Checked):");
+                Console.WriteLine("Short: " + @short + "ms");
+                Console.WriteLine("Hello: " + hello + "ms");
+                Console.WriteLine("Long: " + @long + "ms");
+            }
+
+            Console.WriteLine();
+
+            {
+                var @short = Benchmark.Measure(() => "Yes".ReverseUnchecked(), iter);
+                var hello = Benchmark.Measure(() => "Hello, World!".ReverseUnchecked(), iter);
+                var @long = Benchmark.Measure(() => "This is a longer (yet not too long) string! (Better pad this out some more...)".ReverseLargeUnchecked(), iter);
+
+                Console.WriteLine("1000 Iterations (Unchecked):");
+                Console.WriteLine("Short: " + @short + "ms");
+                Console.WriteLine("Hello: " + hello + "ms");
+                Console.WriteLine("Long: " + @long + "ms");
+            }
         }
     }
 }
