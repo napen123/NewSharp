@@ -10,6 +10,58 @@ namespace NewSharpTesting
     public class MathHelperTest
     {
         [TestMethod]
+        public void EvenOddTest()
+        {
+            Assert.IsTrue(16.IsEven());
+            Assert.IsFalse(3.IsEven());
+
+            Assert.IsTrue(MathHelper.IsEven(30));
+            Assert.IsFalse(MathHelper.IsEven(25));
+
+            Assert.IsTrue(7.IsOdd());
+            Assert.IsFalse(12.IsOdd());
+
+            Assert.IsTrue(MathHelper.IsOdd(17));
+            Assert.IsFalse(MathHelper.IsOdd(100));
+        }
+
+        [TestMethod]
+        public void HasFlagTest()
+        {
+            const int flagA = 1;
+            const int flagB = 2;
+
+            {
+                const int a = flagA;
+
+                Assert.IsTrue(a.HasFlag(flagA));
+                Assert.IsFalse(a.HasFlag(flagB));
+            }
+
+            {
+                const int b = flagB;
+
+                Assert.IsFalse(b.HasFlag(flagA));
+                Assert.IsTrue(b.HasFlag(flagB));
+            }
+
+            {
+                const int ab = flagA | flagB;
+
+                Assert.IsTrue(ab.HasFlag(flagA));
+                Assert.IsTrue(ab.HasFlag(flagB));
+            }
+        }
+
+        [TestMethod]
+        public void ToBooleanTest()
+        {
+            Assert.IsTrue(5.ToBoolean());
+            Assert.IsTrue((-7).ToBoolean());
+            Assert.IsFalse(0.ToBoolean());
+        }
+
+        [TestMethod]
         public void AbsTest()
         {
             Assert.AreEqual(0f, MathHelper.Abs(0f));
