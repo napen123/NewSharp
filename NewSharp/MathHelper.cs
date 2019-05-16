@@ -10,6 +10,52 @@ namespace NewSharp
         public const double RadToDeg = 180 / Math.PI;
         public const double DegToRad = Math.PI / 180;
 
+        #region Absolute Value
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Abs(sbyte value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Abs(short value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Abs(int value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Abs(long value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Abs(float value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Abs(double value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static decimal Abs(decimal value)
+        {
+            return value >= 0 ? value : -value;
+        }
+
+        #endregion
+
         #region Conversions
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -90,7 +136,7 @@ namespace NewSharp
 
         #endregion
 
-        #region Sums
+        #region Integer Sums
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sum(sbyte n)
@@ -132,6 +178,82 @@ namespace NewSharp
         public static ulong Sum(ulong n)
         {
             return (n * (n + 1)) >> 1;
+        }
+
+        #endregion
+
+        #region Floating-Point Sums
+
+        public static float KahanSum(float[] inputs)
+        {
+            var sum = 0f;
+            var err = 0f;
+
+            for(var i = 0; i < inputs.Length; i++)
+            {
+                var y = inputs[i] - err;
+                var t = sum + y;
+                
+                err = t - sum - y;
+                sum = t;
+            }
+
+            return sum;
+        }
+
+        public static double KahanSum(double[] inputs)
+        {
+            var sum = 0.0;
+            var err = 0.0;
+
+            for (var i = 0; i < inputs.Length; i++)
+            {
+                var y = inputs[i] - err;
+                var t = sum + y;
+
+                err = t - sum - y;
+                sum = t;
+            }
+
+            return sum;
+        }
+
+        public static float NeumaierSum(float[] inputs)
+        {
+            var sum = 0f;
+            var err = 0f;
+
+            for (var i = 0; i < inputs.Length; i++)
+            {
+                var input = inputs[i];
+                var t = sum + input;
+
+                err += Abs(sum) >= Abs(input)
+                    ? sum - t + input
+                    : input - t + sum;
+                sum = t;
+            }
+
+            return sum + err;
+        }
+
+        public static double NeumaierSum(double[] inputs)
+        {
+            var sum = 0.0;
+            var err = 0.0;
+
+            for (var i = 0; i < inputs.Length; i++)
+            {
+                var input = inputs[i];
+                var t = sum + input;
+
+                err += Abs(sum) >= Abs(input)
+                    ? sum - t + input
+                    : input - t + sum;
+                sum = t;
+            }
+
+            return sum + err;
         }
 
         #endregion
