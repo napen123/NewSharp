@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NewSharp.Extensions;
 
 namespace NewSharpTesting.Extensions
@@ -30,7 +32,7 @@ namespace NewSharpTesting.Extensions
                 Assert.AreEqual("Hello", dict.GetOrAdd(key, "Hello"));
 
                 dict[key] = "Bye";
-                Assert.AreEqual("Bye", dict.GetOrAdd(key, "???"));
+                Assert.AreEqual("Bye", dict.GetOrAddLazy(key, () => "???"));
             }
         }
 

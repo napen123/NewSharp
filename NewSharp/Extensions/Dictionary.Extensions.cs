@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Concurrent;
 
 namespace NewSharp.Extensions
@@ -15,6 +16,17 @@ namespace NewSharp.Extensions
             return newValue;
         }
 
+        public static TValue GetOrAddLazy<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, Func<TValue> newValue)
+        {
+            if (dict.TryGetValue(key, out var value))
+                return value;
+
+            var calculatedValue = newValue();
+            dict.Add(key, calculatedValue);
+
+            return calculatedValue;
+        }
+
         public static TValue GetOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue newValue)
         {
             if (dict.TryGetValue(key, out var value))
@@ -23,6 +35,17 @@ namespace NewSharp.Extensions
             dict.Add(key, newValue);
 
             return newValue;
+        }
+
+        public static TValue GetOrAddLazy<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> newValue)
+        {
+            if (dict.TryGetValue(key, out var value))
+                return value;
+
+            var calculatedValue = newValue();
+            dict.Add(key, calculatedValue);
+
+            return calculatedValue;
         }
 
         public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
