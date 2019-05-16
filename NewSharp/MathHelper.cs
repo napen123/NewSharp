@@ -5,10 +5,15 @@ namespace NewSharp
 {
     public static class MathHelper
     {
-        public const double Tau = 2 * Math.PI;
+        public const double SqrtTwo = 1.4142135623730950;
 
-        public const double RadToDeg = 180 / Math.PI;
-        public const double DegToRad = Math.PI / 180;
+        public const double GoldenRatio = 1.6180339887498948;
+        public const double EulerMascheroni = 0.577215664901533;
+
+        public const double Tau = 2.0 * Math.PI;
+
+        public const double RadToDeg = 180.0 / Math.PI;
+        public const double DegToRad = Math.PI / 180.0;
 
         #region Even
 
