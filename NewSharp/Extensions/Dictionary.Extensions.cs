@@ -25,8 +25,7 @@ namespace NewSharp.Extensions
             return newValue;
         }
 
-        public static TValue? GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
-            where TValue: struct
+        public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
         {
             if (dict.TryGetValue(key, out var value))
                 return value;
@@ -36,8 +35,7 @@ namespace NewSharp.Extensions
             return default;
         }
 
-        public static TValue? GetOrAddDefault<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
-            where TValue: struct
+        public static TValue GetOrAddDefault<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key)
         {
             if (dict.TryGetValue(key, out var value))
                 return value;
@@ -48,7 +46,6 @@ namespace NewSharp.Extensions
         }
 
         public static TValue GetOrAddDefault<TKey, TValue>(this ConcurrentDictionary<TKey, TValue> dict, TKey key)
-            where TValue: struct
         {
             return dict.GetOrAdd(key, default(TValue));
         }
