@@ -12,9 +12,6 @@ namespace NewSharpTesting.Extensions
         [TestMethod]
         public void ReverseTest()
         {
-            Assert.IsNull(((string)null).Reverse());
-            Assert.IsNull(((string)null).ReverseLarge());
-
             Assert.AreEqual(string.Empty, string.Empty.Reverse());
             Assert.AreEqual(string.Empty, string.Empty.ReverseLarge());
 
@@ -33,7 +30,6 @@ namespace NewSharpTesting.Extensions
         [TestMethod]
         public void IsWhitespaceTest()
         {
-            Assert.AreEqual(false, ((string) null).IsWhiteSpace());
             Assert.AreEqual(true, "         ".IsWhiteSpace());
             Assert.AreEqual(false, "Test!".IsWhiteSpace());
             Assert.AreEqual(false, "   Test! ".IsWhiteSpace());
@@ -42,13 +38,11 @@ namespace NewSharpTesting.Extensions
         [TestMethod]
         public void TrySubstringTest()
         {
-            string result;
-
-            Assert.IsTrue("Test".TrySubstring(2, out result));
+            Assert.IsTrue("Test".TrySubstring(2, out var result));
             Assert.AreEqual("st", result);
 
-            Assert.IsFalse((null as string).TrySubstring(1, out result));
-            Assert.IsFalse("Test".TrySubstring(5, out result));
+            Assert.IsFalse((null as string).TrySubstring(1, out _));
+            Assert.IsFalse("Test".TrySubstring(5, out _));
 
             Assert.IsTrue("Test".TrySubstring(1, 2, out result));
             Assert.AreEqual("es", result);

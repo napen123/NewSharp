@@ -6,9 +6,6 @@ namespace NewSharp.Extensions
     {
         public static unsafe string Reverse(this string str)
         {
-            if (str == null)
-                return null;
-
             var length = str.Length;
 
             if (length == 0)
@@ -48,9 +45,6 @@ namespace NewSharp.Extensions
 
         public static string ReverseLarge(this string str)
         {
-            if (str == null)
-                return null;
-
             var length = str.Length;
 
             if (length == 0)
@@ -72,9 +66,6 @@ namespace NewSharp.Extensions
 
         public static bool IsWhiteSpace(this string str)
         {
-            if (str == null)
-                return false;
-
             if (str.Length == 0)
                 return true;
 
@@ -87,7 +78,7 @@ namespace NewSharp.Extensions
             return true;
         }
 
-        public static bool TrySubstring(this string str, int start, out string result)
+        public static bool TrySubstring(this string? str, int start, out string? result)
         {
             if (str == null)
             {
@@ -110,7 +101,7 @@ namespace NewSharp.Extensions
             }
         }
 
-        public static bool TrySubstring(this string str, int start, int length, out string result)
+        public static bool TrySubstring(this string? str, int start, int length, out string? result)
         {
             if (str == null)
             {
