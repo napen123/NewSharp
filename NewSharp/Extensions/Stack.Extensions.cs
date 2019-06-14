@@ -4,8 +4,7 @@ namespace NewSharp.Extensions
 {
     public static class StackExtensions
     {
-        public static bool TryPeek<T>(this Stack<T> stack, out T? item)
-            where T: class
+        public static bool TryPeek<T>(this Stack<T> stack, out T item)
         {
             try
             {
@@ -21,8 +20,7 @@ namespace NewSharp.Extensions
             }
         }
 
-        public static bool TryPop<T>(this Stack<T> stack, out T? item)
-            where T: class
+        public static bool TryPop<T>(this Stack<T> stack, out T item)
         {
             try
             {

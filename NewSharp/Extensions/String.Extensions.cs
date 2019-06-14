@@ -78,7 +78,7 @@ namespace NewSharp.Extensions
             return true;
         }
 
-        public static bool TrySubstring(this string? str, int start, out string? result)
+        public static bool TrySubstring(this string str, int start, out string result)
         {
             if (str == null)
             {
@@ -101,7 +101,7 @@ namespace NewSharp.Extensions
             }
         }
 
-        public static bool TrySubstring(this string? str, int start, int length, out string? result)
+        public static bool TrySubstring(this string str, int start, int length, out string result)
         {
             if (str == null)
             {
