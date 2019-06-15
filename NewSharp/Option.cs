@@ -88,50 +88,50 @@ namespace NewSharp
         public Option<TNew> Map<TNew>(Func<T, TNew> map)
         {
             return IsSome
-                ? new Option<TNew>(true, map(_value))
-                : new Option<TNew>(false, default);
+                ? Option.Some(map(_value))
+                : Option.None<TNew>();
         }
 
         public Option<TNew> MapOr<TNew>(TNew defaultValue, Func<T, TNew> map)
         {
             return IsSome
-                ? new Option<TNew>(true, map(_value))
-                : new Option<TNew>(true, defaultValue);
+                ? Option.Some(map(_value))
+                : Option.Some(defaultValue);
         }
 
         public Option<TNew> MapOrElse<TNew>(Func<TNew> defaultValue, Func<T, TNew> map)
         {
             return IsSome
-                ? new Option<TNew>(true, map(_value))
-                : new Option<TNew>(true, defaultValue());
+                ? Option.Some(map(_value))
+                : Option.Some(defaultValue());
         }
 
         public Option<TNew> And<TNew>(Option<TNew> other)
         {
             return IsSome
                 ? other
-                : new Option<TNew>(false, default);
+                : Option.None<TNew>();
         }
 
         public Option<TNew> AndThen<TNew>(Func<T, Option<TNew>> other)
         {
             return IsSome
                 ? other(_value)
-                : new Option<TNew>(false, default);
+                : Option.None<TNew>();
         }
 
         public Option<T> Or(Option<T> other)
         {
             return IsSome
                 ? other
-                : new Option<T>(false, default);
+                : Option.None<T>();
         }
 
         public Option<T> OrElse(Func<Option<T>> other)
         {
             return IsSome
                 ? other()
-                : new Option<T>(false, default);
+                : Option.None<T>();
         }
     }
 }
