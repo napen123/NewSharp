@@ -130,6 +130,11 @@ namespace NewSharp
             return IsOk ? _okValue : default;
         }
 
+        public TOk ExpectUnsafe()
+        {
+            return _okValue;
+        }
+
         public TError ExpectError()
         {
             if (IsError)
@@ -159,6 +164,11 @@ namespace NewSharp
         public TError ExpectErrorOrDefault()
         {
             return IsError ? _errorValue : default;
+        }
+
+        public TError ExpectErrorUnsafe()
+        {
+            return _errorValue;
         }
 
         public Result<TNew, TError> Map<TNew>(Func<TOk, TNew> map)

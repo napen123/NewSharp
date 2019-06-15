@@ -114,6 +114,11 @@ namespace NewSharp
             return IsSome ? _value : default;
         }
 
+        public T ExpectUnsafe()
+        {
+            return _value;
+        }
+
         public Option<TNew> Map<TNew>(Func<T, TNew> map)
         {
             return IsSome
