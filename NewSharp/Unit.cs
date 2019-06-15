@@ -3,9 +3,14 @@
 namespace NewSharp
 {
     [Serializable]
-    public readonly struct Unit : IEquatable<Unit>, IComparable<Unit>
+    public readonly struct Unit : ICloneable, IEquatable<Unit>, IComparable<Unit>
     {
         public static readonly Unit Empty = new Unit();
+
+        public object Clone()
+        {
+            return Empty;
+        }
 
         public bool Equals(Unit other)
         {
