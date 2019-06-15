@@ -11,21 +11,21 @@ namespace NewSharp
     }
 
     [Serializable]
-    public sealed class OptionNoneException : Exception
+    public sealed class OptionException : Exception
     {
-        public OptionNoneException()
+        public OptionException()
         {
         }
 
-        public OptionNoneException(string message) : base(message)
+        public OptionException(string message) : base(message)
         {
         }
 
-        public OptionNoneException(string message, Exception innerException) : base(message, innerException)
+        public OptionException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        public OptionNoneException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public OptionException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
@@ -33,103 +33,103 @@ namespace NewSharp
     [Serializable]
     public readonly struct Option<T>
     {
-        private readonly bool _hasValue;
         private readonly T _value;
 
         public bool IsSome
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => _hasValue;
+            get;
         }
 
         public bool IsNone
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => !_hasValue;
+            get => !IsSome;
         }
 
         internal Option(bool hasValue, T value)
         {
-            _hasValue = hasValue;
+            IsSome = hasValue;
+
             _value = value;
         }
 
         public T Expect()
         {
-            if (_hasValue)
+            if (IsSome)
                 return _value;
 
-            throw new OptionNoneException();
+            throw new OptionException();
         }
 
         public T Expect(string message)
         {
-            if (_hasValue)
+            if (IsSome)
                 return _value;
 
-            throw new OptionNoneException(message);
+            throw new OptionException(message);
         }
 
         public T ExpectOr(T defaultValue)
         {
-            return _hasValue ? _value : defaultValue;
+            return IsSome ? _value : defaultValue;
         }
 
         public T ExpectOrElse(Func<T> defaultValue)
         {
-            return _hasValue ? _value : defaultValue();
+            return IsSome ? _value : defaultValue();
         }
 
         public T ExpectOrDefault()
         {
-            return _hasValue ? _value : default;
+            return IsSome ? _value : default;
         }
 
         public Option<TNew> Map<TNew>(Func<T, TNew> map)
         {
-            return _hasValue
+            return IsSome
                 ? new Option<TNew>(true, map(_value))
                 : new Option<TNew>(false, default);
         }
 
         public Option<TNew> MapOr<TNew>(TNew defaultValue, Func<T, TNew> map)
         {
-            return _hasValue
+            return IsSome
                 ? new Option<TNew>(true, map(_value))
                 : new Option<TNew>(true, defaultValue);
         }
 
         public Option<TNew> MapOrElse<TNew>(Func<TNew> defaultValue, Func<T, TNew> map)
         {
-            return _hasValue
+            return IsSome
                 ? new Option<TNew>(true, map(_value))
                 : new Option<TNew>(true, defaultValue());
         }
 
         public Option<TNew> And<TNew>(Option<TNew> other)
         {
-            return _hasValue
+            return IsSome
                 ? other
                 : new Option<TNew>(false, default);
         }
 
         public Option<TNew> AndThen<TNew>(Func<T, Option<TNew>> other)
         {
-            return _hasValue
+            return IsSome
                 ? other(_value)
                 : new Option<TNew>(false, default);
         }
 
         public Option<T> Or(Option<T> other)
         {
-            return _hasValue
+            return IsSome
                 ? other
                 : new Option<T>(false, default);
         }
 
         public Option<T> OrElse(Func<Option<T>> other)
         {
-            return _hasValue
+            return IsSome
                 ? other()
                 : new Option<T>(false, default);
         }
