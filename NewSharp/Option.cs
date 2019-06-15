@@ -11,6 +11,32 @@ namespace NewSharp
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Option<T> None<T>() => new Option<T>(false, default);
+
+        public static Option<Unit> Try(Action action)
+        {
+            try
+            {
+                action();
+
+                return Some(Unit.Empty);
+            }
+            catch
+            {
+                return None<Unit>();
+            }
+        }
+
+        public static Option<T> Try<T>(Func<T> func)
+        {
+            try
+            {
+                return Some(func());
+            }
+            catch
+            {
+                return None<T>();
+            }
+        }
     }
 
     [Serializable]

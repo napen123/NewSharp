@@ -27,6 +27,18 @@ namespace NewSharp
                 return Error<Unit, Exception>(e);
             }
         }
+
+        public static Result<T, Exception> Try<T>(Func<T> func)
+        {
+            try
+            {
+                return Ok<T, Exception>(func());
+            }
+            catch (Exception e)
+            {
+                return Error<T, Exception>(e);
+            }
+        }
     }
 
     [Serializable]
