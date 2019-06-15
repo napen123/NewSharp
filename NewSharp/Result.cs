@@ -6,9 +6,11 @@ namespace NewSharp
 {
     public static class Result
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Result<TOk, TError> Ok<TOk, TError>(TOk value) =>
             new Result<TOk, TError>(true, value, default);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Result<TOk, TError> Error<TOk, TError>(TError value) =>
             new Result<TOk, TError>(true, default, value);
     }

@@ -6,7 +6,10 @@ namespace NewSharp
 {
     public static class Option
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Option<T> Some<T>(T value) => new Option<T>(true, value);
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Option<T> None<T>() => new Option<T>(false, default);
     }
 
