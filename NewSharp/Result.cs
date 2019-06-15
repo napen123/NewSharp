@@ -13,6 +13,20 @@ namespace NewSharp
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Result<TOk, TError> Error<TOk, TError>(TError value) =>
             new Result<TOk, TError>(true, default, value);
+
+        public static Result<Unit, Exception> Try(Action action)
+        {
+            try
+            {
+                action();
+
+                return Ok<Unit, Exception>(Unit.Empty);
+            }
+            catch (Exception e)
+            {
+                return Error<Unit, Exception>(e);
+            }
+        }
     }
 
     [Serializable]
