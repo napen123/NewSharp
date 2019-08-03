@@ -10,6 +10,21 @@ namespace NewSharpTesting.Extensions
     public class StringExtensionsTest
     {
         [TestMethod]
+        public void WordsTest()
+        {
+            const string testString = "Hello, World!\tGoodbye,    World! ";
+
+            var words = testString.GetWords();
+            Assert.AreEqual(4, words.Length);
+            Assert.AreEqual("Hello,", words[0]);
+            Assert.AreEqual("World!", words[1]);
+            Assert.AreEqual("Goodbye,", words[2]);
+            Assert.AreEqual("World!", words[3]);
+
+            Assert.AreEqual("Hello, World! Goodbye, World!", words.ConcatWords());
+        }
+
+        [TestMethod]
         public void ReverseTest()
         {
             Assert.AreEqual(string.Empty, string.Empty.Reverse());

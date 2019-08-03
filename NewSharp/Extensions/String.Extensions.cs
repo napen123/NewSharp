@@ -18,6 +18,20 @@ namespace NewSharp.Extensions
             return true;
         }
 
+        #region Words
+
+        public static string[] GetWords(this string str)
+        {
+            return str.Split((char[]) null, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static string ConcatWords(this string[] strs)
+        {
+            return String.Join(" ", strs);
+        }
+
+        #endregion
+
         #region Reverse
 
         public static unsafe string Reverse(this string str)
